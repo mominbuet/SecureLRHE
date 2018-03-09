@@ -1,0 +1,7 @@
+suppressMessages(library("ROCR"))
+f<-readLines("output.txt")
+original<-as.numeric(unlist(strsplit(f[2],",")))
+predicted<-as.numeric(unlist(strsplit(f[1],",")))
+pred<-prediction(predicted,original)
+perf<-performance(pred,"auc")
+print(paste0("AUC: ",as.numeric(unlist(perf@y.values))),quote = FALSE,digits=3)
